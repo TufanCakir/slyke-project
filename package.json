@@ -16,5 +16,9 @@
     "eslint": "^8.0.0",
     "prettier": "^3.0.0"
   },
-  "packageManager": "pnpm@9.0.6"
+  "packageManager": "pnpm@9.0.6",
+  "workspaces": [
+    "packages/*",
+    "examples/*"
+  ]
 }
