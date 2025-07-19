@@ -1,0 +1,4 @@
+# slyke-project/pnpm-workspace.yaml
+packages:
+  - 'packages/*'
+  - 'examples/*' # <--- Dieser Eintrag ist entscheidend!

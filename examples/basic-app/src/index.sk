@@ -1,0 +1,15 @@
+# Dies ist meine erste Slyke-Datei!
+# Sie wird vom slyke-loader in JavaScript umgewandelt.
+
+message "Willkommen bei Slyke!"
+
+<echo message="Dies ist eine Echo-Nachricht, gerendert mit Preact!" />
+<echo message="Eine weitere Nachricht, nun über Virtual DOM." />
+
+<button text="Preact Button 1 (Sollte SCHWARZ sein!)" onClick="alert('Preact Button 1 geklickt!')" />
+<button text="Preact Button 2 (Sollte auch SCHWARZ sein!)" onClick="console.log('Preact Button 2 geklickt!');" />
+
+# Der alte 'component MyButton' - JETZT AUSKOMMENTIERT:
+# component MyButton:
+#   text "Klick mich"
+#   onClick: alert("Button geklickt!") 

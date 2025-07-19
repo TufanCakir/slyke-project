@@ -1,0 +1,66 @@
+/* examples/basic-app/src/styles.css */
+
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #000000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.slyke-echo {
+    padding: 10px;
+    margin: 5px;
+    background-color: rgb(0, 0, 0);
+    border-radius: 5px;
+    border: 1px solid #0077ff;
+    color: #ffffff;
+    text-align: center;
+}
+
+.slyke-button {
+    padding: 10px 20px;
+    margin: 10px auto;
+    font-size: 1em;
+    cursor: pointer;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    display: block;
+}
+
+.slyke-button:hover {
+    background-color: #0099ff;
+}
+
+.slyke-button:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.slyke-message {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #ffffff;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.slyke-button-old {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 1em;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}

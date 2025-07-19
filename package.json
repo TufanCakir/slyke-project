@@ -1,0 +1,20 @@
+{
+  "name": "slyke-monorepo",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Monorepo for the Slyke programming language and its tools.",
+  "scripts": {
+    "build": "pnpm -r build",
+    "test": "pnpm -r test",
+    "start-example": "pnpm --filter slyke-basic-app-example start",
+    "lint": "pnpm -r lint"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.28.0",
+    "@babel/core": "^7.28.0",
+    "@babel/preset-env": "^7.28.0",
+    "eslint": "^8.0.0",
+    "prettier": "^3.0.0"
+  },
+  "packageManager": "pnpm@9.0.6"
+}

@@ -1,0 +1,26 @@
+{
+  "name": "slyke-loader",
+  "version": "0.1.0",
+  "description": "Webpack loader for the Slyke programming language.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "rimraf dist && babel src --out-dir dist --extensions \".js\" --copy-files --include-dotfiles",
+    "prepublishOnly": "pnpm run build",
+    "test": "echo \"Running loader tests\""
+  },
+  "keywords": [
+    "slyke",
+    "webpack",
+    "loader"
+  ],
+  "author": "Tufan Cakir",
+  "license": "MIT",
+  "dependencies": {
+    "preact": "^10.0.0",
+    "slyke-compiler": "^0.1.0"
+  },
+  "devDependencies": {
+    "rimraf": "^5.0.0",
+    "webpack": "^5.0.0"
+  }
+}

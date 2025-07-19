@@ -1,0 +1,21 @@
+{
+  "name": "slyke-compiler",
+  "version": "0.1.0",
+  "description": "The compiler for the Slyke programming language.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "rimraf dist && babel src --out-dir dist --extensions \".js\"",
+    "prepublishOnly": "pnpm run build",
+    "test": "echo \"Running compiler tests\""
+  },
+  "keywords": [
+    "slyke",
+    "compiler",
+    "language"
+  ],
+  "author": "Tufan Cakir",
+  "license": "MIT",
+  "devDependencies": {
+    "rimraf": "^5.0.0"
+  }
+}
