@@ -1,15 +1,15 @@
 // packages/slyke-loader/src/index.js
 
-// Importiere den Slyke-Compiler aus dem lokalen Workspace
 const path = require("path");
-const slykeCompiler = require("slyke-compiler"); // <--- HIER IST DIE ÄNDERUNG!
-// Angepasster Pfad
+// Importiere den Slyke-Compiler aus dem lokalen Workspace
+const slykeCompiler = require("slyke-compiler"); // Dies funktioniert, wenn pnpm install korrekt ausgeführt wurde
 
 module.exports = function (source) {
   // `this` ist der Loader Context von Webpack
   // `source` enthält den Inhalt der .sk-Datei, die kompiliert wird.
 
-  console.log("Compiling Slyke file:", this.resourcePath);
+  console.log("🛠️ Slyke-Loader wird ausgeführt für:", this.resourcePath);
+  console.log("📄 Eingehender Slyke-Code:\n" + source); // Hier 'source' direkt loggen
 
   try {
     // Rufe die Kompilierungsfunktion deines Slyke-Compilers auf
@@ -19,7 +19,7 @@ module.exports = function (source) {
     return compiledJsCode;
   } catch (error) {
     // Fehlerbehandlung
-    console.error("Slyke Compilation Error:", error);
+    console.error("❌ Slyke Kompilierungsfehler:", error);
     // Webpack's Methode, um einen Fehler auszugeben
     this.emitError(
       new Error(
@@ -27,6 +27,6 @@ module.exports = function (source) {
       )
     );
     // Gib fehlerhaften Code zurück, der im Browser einen Fehler loggt
-    return `console.error("Slyke compilation failed for ${this.resourcePath}:", ${JSON.stringify(error.message)});`;
+    return `console.error("❌ Slyke Kompilierung fehlgeschlagen für ${this.resourcePath}:", ${JSON.stringify(error.message)});`;
   }
 };

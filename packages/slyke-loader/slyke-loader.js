@@ -1,11 +1,13 @@
-// loaders/slyke-loader.js
-const path = require("path"); // Brauchen wir für path.resolve
-const slykeCompiler = require(path.resolve(
-  __dirname,
-  "../compiler/compiler.js"
-));
-// Oder, wenn dein Compiler innerhalb des loaders-Ordners liegt (weniger üblich):
-// const slykeCompiler = require('./your-compiler-file');
+// packages/slyke-loader/slyke-loader.js
+const path = require("path");
+
+// Korrigierter Pfad zum Slyke Compiler
+const slykeCompiler = require(
+  path.resolve(
+    __dirname,
+    "../slyke-compiler/src/index.js" // <--- HIER MUSS DER PFAD KORRIGIERT WERDEN
+  )
+);
 
 module.exports = function (source) {
   console.log("Compiling Slyke file:", this.resourcePath);

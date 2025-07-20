@@ -1,25 +1,43 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+console.log("--- DEBUG: webpack.config.js wird geladen! ---"); // FÜGE DIES HINZU
+
+// HIER DEFINIEREN WIR DEN ABSOLUTEN PFAD ZUM LOADER
+// BITTE ANPASSEN, SOBALD DU DEN GENAUEN PFAD BESTÄTIGT HAST!
+// Beispiel:
+const SLYKE_LOADER_PATH = path.resolve(
+  __dirname,
+  "../../packages/slyke-loader/src/index.js"
+);
+// ^^^^ ERSETZE DIESEN PFAD MIT DEM VON DIR BESTÄTIGTEN ABSOLUTEN PFAD ZU DEINEM LOADER ^^^^
 
 module.exports = {
   // Der Einstiegspunkt für deine Anwendung
-  // WICHTIG: Ändere dies auf './src/index.js' (wenn du die empfohlene JS-Einstiegsdatei nutzt)
-  entry: "./src/index.js", // <--- Hier wahrscheinlich ÄNDERN!
+  entry: "./src/index.js",
 
-  // Ausgabe-Konfiguration (wo die gebündelten Dateien landen sollen)
+  // Ausgabe-Konfiguration
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist"),
     clean: true,
   },
 
-  // Module-Regeln: Wie verschiedene Dateitypen behandelt werden sollen
+  // resolveLoader ist jetzt optional/auskommentiert, da wir den Loader direkt referenzieren
+  // resolveLoader: {
+  //   modules: [
+  //     'node_modules',
+  //     path.resolve(__dirname, '../../packages/slyke-loader/src'),
+  //     path.resolve(__dirname, '../../packages/slyke-loader')
+  //   ],
+  // },
+
+  // Module-Regeln
   module: {
     rules: [
       {
         test: /\.sk$/, // Regel für Slyke-Dateien
         use: {
-          loader: "slyke-loader",
+          loader: SLYKE_LOADER_PATH, // <--- HIER DIREKT DEN ABSOLUTEN PFAD NUTZEN
           options: {
             // Hier könnten Optionen für deinen Slyke-Compiler übergeben werden
           },
@@ -29,22 +47,10 @@ module.exports = {
         test: /\.css$/, // Regel für CSS-Dateien
         use: ["style-loader", "css-loader"],
       },
-      // Füge hier weitere Regeln für JavaScript hinzu, wenn du es brauchst
-      // z.B. für die Transpilierung von ES6+ in älteres JS, wenn dein Compiler das nicht macht.
-      // {
-      //   test: /\.js$/,
-      //   exclude: /node_modules/,
-      //   use: {
-      //     loader: 'babel-loader',
-      //     options: {
-      //       presets: ['@babel/preset-env', '@babel/preset-react'] // @babel/preset-react für JSX/Preact's h()
-      //     }
-      //   }
-      // }
     ],
   },
 
-  // Plugins: Zusätzliche Funktionalitäten
+  // Plugins
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "public/index.html"),

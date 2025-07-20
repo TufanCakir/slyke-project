@@ -1,101 +1,143 @@
 // packages/slyke-compiler/src/index.js
 
+console.log("[Slyke-Compiler] Modul wird geladen..."); // Geändert, da es das Compiler-Modul ist
+
+function log(...args) {
+  // Zentralisiertes Logging
+  console.log("[Slyke-Compiler]", ...args);
+}
+
+// Hilfsfunktionen für Preact-Header und App-Body (bleiben hier)
+function getPreactHeader() {
+  return `import { h, render } from 'preact';
+let appRootElement = null;
+function getAppRoot() {
+  if (!appRootElement) {
+    appRootElement = document.getElementById('app');
+    if (!appRootElement) {
+      console.error("❌ Kein #app-Element im HTML gefunden.");
+      return null;
+    }
+  }
+  return appRootElement;
+}
+const compiledElements = [];
+const slykeVariables = {}; // Variablen-Speicher hier
+`;
+}
+
+function buildPreactAppBody() {
+  return `
+    const SlykeApp = () => h('div', null, compiledElements);
+    const rootElement = getAppRoot();
+    if (rootElement) {
+      render(h(SlykeApp, null), rootElement);
+    }
+    console.log("✅ Slyke-Komponenten erfolgreich gerendert.");
+  `;
+}
+
 module.exports = {
   compile: function (slykeCode) {
-    let generatedJs = `
-      import { h, render } from 'preact';
+    log(
+      "Empfangener Slyke-Code zur Kompilierung:\n---START---\n" +
+        slykeCode +
+        "\n---ENDE---"
+    );
 
-      let appRootElement = null;
-      function getAppRoot() {
-        if (!appRootElement) {
-          appRootElement = document.getElementById('app');
-          if (!appRootElement) {
-            console.error("Element with ID 'app' not found. Ensure <div id='app'> is in your HTML.");
-            return null;
-          }
-        }
-        return appRootElement;
+    let generatedJs = getPreactHeader();
+
+    // Definiere die Regeln hier im Compiler
+    const rules = [
+      {
+        name: "<echo>",
+        regex: /<echo\s+message="([^"]*)"\s*\/>/g,
+        handler: (match) => `
+          compiledElements.push(
+            h('div', { className: 'slyke-echo' }, ${JSON.stringify(match[1])})
+          );
+        `,
+      },
+      // <template> wurde entfernt, falls du es nicht mehr willst
+      {
+        name: "<button>",
+        regex: /<button\s+text="([^"]*)"(?:\s+onClick="([^"]*)")?\s*\/>/g,
+        handler: (match) => `
+          compiledElements.push(
+            h('button', {
+              onClick: () => { ${match[2] || ""} },
+              className: 'slyke-button'
+            }, ${JSON.stringify(match[1])})
+          );
+        `,
+      },
+      {
+        name: `message "..."`,
+        regex: /message\s+"([^"]*)"/g,
+        handler: (match) => `
+          compiledElements.push(
+            h('p', { className: 'slyke-message' }, ${JSON.stringify(match[1])})
+          );
+        `,
+      },
+
+      // --- NEUE TAGS HIER BEGINNEN ---
+      {
+        name: "<Variable>",
+        regex: /<Variable\s+name="([^"]*)"\s+value="([^"]*)"\s*\/>/g,
+        handler: (match) => {
+          const varName = match[1];
+          const varValue = match[2];
+          return `slykeVariables[${JSON.stringify(varName)}] = ${JSON.stringify(varValue)};\n`;
+        },
+      },
+      {
+        name: "<Display>",
+        regex: /<Display\s+value="\{([^}]+)\}"\s*\/>/g,
+        handler: (match) => {
+          const varToDisplay = match[1];
+          return `
+            compiledElements.push(
+              h('span', { className: 'slyke-display' }, slykeVariables[${JSON.stringify(varToDisplay)}])
+            );
+          `;
+        },
+      },
+      {
+        name: "<Box>",
+        regex: /<Box\s*\/>/g,
+        handler: () => `
+          compiledElements.push(
+            h('div', { className: 'slyke-box' })
+          );
+        `,
+      },
+      // --- NEUE TAGS HIER ENDEN ---
+    ];
+
+    for (const { name, regex, handler } of rules) {
+      let match;
+      regex.lastIndex = 0; // Wichtig: lastIndex zurücksetzen
+      while ((match = regex.exec(slykeCode)) !== null) {
+        log(`🔎 Gefunden (${name}):`, match.slice(1).join(", "));
+        generatedJs += handler(match);
       }
-
-      const compiledElements = [];
-    `;
-
-    let match;
-
-    // --- Kompilierung des <echo> Tags ---
-    const echoRegex = /<echo\s+message="([^"]*)"\s*\/>/g;
-    while ((match = echoRegex.exec(slykeCode)) !== null) {
-      const message = match[1];
-      generatedJs += `
-        compiledElements.push(
-          h('div', {
-            // style: { ... }, <--- DIESES STYLE-OBJEKT ENTFERNEN
-            className: 'slyke-echo' // <--- NEU: CSS-Klasse zuweisen
-          }, ${JSON.stringify(message)})
-        );
-      `;
     }
 
-    // --- Kompilierung des <button> Tags ---
-    const buttonRegex =
-      /<button\s+text="([^"]*)"(?:\s+onClick="([^"]*)")?\s*\/>/g;
-    while ((match = buttonRegex.exec(slykeCode)) !== null) {
-      const buttonText = match[1];
-      const onClickAction = match[2] || "";
-
-      generatedJs += `
-        compiledElements.push(
-          h('button', {
-            onClick: () => { ${onClickAction} },
-            // style: { ... }, <--- DIESES STYLE-OBJEKT ENTFERNEN
-            className: 'slyke-button' // <--- NEU: CSS-Klasse zuweisen
-          }, ${JSON.stringify(buttonText)})
-        );
-      `;
-    }
-
-    // --- Kompilierung des 'message' Statements ---
-    const messageStatementRegex = /message\s+"([^"]*)"/g;
-    while ((match = messageStatementRegex.exec(slykeCode)) !== null) {
-      const msg = match[1];
-      generatedJs += `
-        compiledElements.push(
-          h('p', {
-            // style: { ... }, <--- DIESES STYLE-OBJEKT ENTFERNEN
-            className: 'slyke-message' // <--- NEU: CSS-Klasse zuweisen
-          }, ${JSON.stringify(msg)})
-        );
-      `;
-    }
-
-    // --- Kompilierung des 'component MyButton' ---
     if (slykeCode.includes("component MyButton:")) {
+      log("🧩 MyButton-Komponente erkannt.");
       generatedJs += `
-            function MyButtonOldComponent() {
-                return h('button', {
-                    onClick: () => { alert("Button Clicked!"); },
-                    // style: { ... }, <--- DIESES STYLE-OBJEKT ENTFERNEN
-                    className: 'slyke-button-old' // <--- NEU: Eigene Klasse für den alten Button
-                }, "Click Me (old component)");
-            }
-            compiledElements.push(h(MyButtonOldComponent));
-        `;
+        function MyButtonOldComponent() {
+          return h('button', {
+            onClick: () => { alert("Button Clicked!"); },
+            className: 'slyke-button-old'
+          }, "Click Me (old component)");
+        }
+        compiledElements.push(h(MyButtonOldComponent));
+      `;
     }
 
-    // --- Abschließendes Rendering der gesamten App mit Preact ---
-    generatedJs += `
-      const SlykeApp = () => {
-        return h('div', null, compiledElements);
-      };
-
-      const rootElement = getAppRoot();
-      if (rootElement) {
-        render(h(SlykeApp, null), rootElement);
-      }
-
-      console.log("Slyke compilation successful and rendered with Preact!");
-    `;
-
+    generatedJs += buildPreactAppBody();
     return generatedJs;
   },
 };

@@ -1,15 +1,12 @@
-# Dies ist meine erste Slyke-Datei!
-# Sie wird vom slyke-loader in JavaScript umgewandelt.
+# Meine erste Slyke-Datei mit neuen Tags!
 
 message "Willkommen bei Slyke!"
 
-<echo message="Dies ist eine Echo-Nachricht, gerendert mit Preact!" />
-<echo message="Eine weitere Nachricht, nun über Virtual DOM." />
+<echo message="Dies ist eine Echo-Nachricht!" />
 
-<button text="Preact Button 1 (Sollte SCHWARZ sein!)" onClick="alert('Preact Button 1 geklickt!')" />
-<button text="Preact Button 2 (Sollte auch SCHWARZ sein!)" onClick="console.log('Preact Button 2 geklickt!');" />
+<Variable name="userName" value="Welt" />
+<Display value="{userName}" />
 
-# Der alte 'component MyButton' - JETZT AUSKOMMENTIERT:
-# component MyButton:
-#   text "Klick mich"
-#   onClick: alert("Button geklickt!") 
+<Box />
+
+<button text="Klick mich!" onClick="alert('Button geklickt!')" />

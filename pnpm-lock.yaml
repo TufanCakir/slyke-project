@@ -78,20 +78,10 @@ importers:
         version: 5.0.10
 
   packages/slyke-loader:
-    dependencies:
-      preact:
-        specifier: ^10.0.0
-        version: 10.26.9
-      slyke-compiler:
-        specifier: ^0.1.0
-        version: 0.1.0
     devDependencies:
       rimraf:
         specifier: ^5.0.0
         version: 5.0.10
-      webpack:
-        specifier: ^5.0.0
-        version: 5.100.2
 
 packages:
 
@@ -2212,9 +2202,6 @@ packages:
   slash@2.0.0:
     resolution: {integrity: sha512-ZYKh3Wh2z1PpEXWr0MpSBZ0V6mZHAQfYevttO11c51CaWjGTaadiKZ+wVt1PbMlDV5qhMFslpZCemhwOK7C89A==}
     engines: {node: '>=6'}
-
-  slyke-compiler@0.1.0:
-    resolution: {integrity: sha512-/Q14uEkFONYoqDQqtby1X6+Y9pkFZd6XCrSrGN/tcqbGUeSDh2a4A2EBrVYCCmIuQi3uVzoMCvN45KAmxgpgyg==}
 
   sockjs@0.3.24:
     resolution: {integrity: sha512-GJgLTZ7vYb/JtPSSZ10hsOYIvEYsjbNU+zPdIHcUaWVNUEPivzxku31865sSSud0Da0W4lEeOPlmw93zLQchuQ==}
@@ -4877,8 +4864,6 @@ snapshots:
 
   slash@2.0.0: {}
 
-  slyke-compiler@0.1.0: {}
-
   sockjs@0.3.24:
     dependencies:
       faye-websocket: 0.11.4
@@ -4982,15 +4967,6 @@ snapshots:
       serialize-javascript: 6.0.2
       terser: 5.43.1
       webpack: 5.100.2(webpack-cli@6.0.1)
-
-  terser-webpack-plugin@5.3.14(webpack@5.100.2):
-    dependencies:
-      '@jridgewell/trace-mapping': 0.3.29
-      jest-worker: 27.5.1
-      schema-utils: 4.3.2
-      serialize-javascript: 6.0.2
-      terser: 5.43.1
-      webpack: 5.100.2
 
   terser@5.43.1:
     dependencies:
@@ -5225,38 +5201,6 @@ snapshots:
       wildcard: 2.0.1
 
   webpack-sources@3.3.3: {}
-
-  webpack@5.100.2:
-    dependencies:
-      '@types/eslint-scope': 3.7.7
-      '@types/estree': 1.0.8
-      '@types/json-schema': 7.0.15
-      '@webassemblyjs/ast': 1.14.1
-      '@webassemblyjs/wasm-edit': 1.14.1
-      '@webassemblyjs/wasm-parser': 1.14.1
-      acorn: 8.15.0
-      acorn-import-phases: 1.0.4(acorn@8.15.0)
-      browserslist: 4.25.1
-      chrome-trace-event: 1.0.4
-      enhanced-resolve: 5.18.2
-      es-module-lexer: 1.7.0
-      eslint-scope: 5.1.1
-      events: 3.3.0
-      glob-to-regexp: 0.4.1
-      graceful-fs: 4.2.11
-      json-parse-even-better-errors: 2.3.1
-      loader-runner: 4.3.0
-      mime-types: 2.1.35
-      neo-async: 2.6.2
-      schema-utils: 4.3.2
-      tapable: 2.2.2
-      terser-webpack-plugin: 5.3.14(webpack@5.100.2)
-      watchpack: 2.4.4
-      webpack-sources: 3.3.3
-    transitivePeerDependencies:
-      - '@swc/core'
-      - esbuild
-      - uglify-js
 
   webpack@5.100.2(webpack-cli@5.1.4):
     dependencies:

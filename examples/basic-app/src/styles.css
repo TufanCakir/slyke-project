@@ -1,66 +1,125 @@
-/* examples/basic-app/src/styles.css */
-
-body {
-    font-family: 'Inter', sans-serif;
-    margin: 0;
-    padding: 20px;
-    background-color: #000000;
+/* Allgemeine Stile für den App-Container */
+#app {
+    /* Beispiel: Zentrierung und Grund-Layout */
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100vh;
+    justify-content: center;
+    min-height: 100vh; /* Mindesthöhe des Viewports */
+    background-color: #f0f0f0;
+    font-family: 'Inter', sans-serif;
 }
 
+/* Stile für <echo> Tag */
 .slyke-echo {
     padding: 10px;
     margin: 5px;
-    background-color: rgb(0, 0, 0);
+    background-color: #00e1ffff; /* Türkis */
     border-radius: 5px;
-    border: 1px solid #0077ff;
-    color: #ffffff;
+    border: 1px solid #b2ebf2;
+    color: #000000ff;
     text-align: center;
 }
 
+/* Stile für <template> Tag */
+.slyke-template {
+    padding: 10px;
+    margin: 5px;
+    background-color: #ff0000ff; /* Rot */
+    border-radius: 5px;
+    border: 1px solid rgb(0, 0, 0); /* Weiß */
+    color: #611b1bff;
+    text-align: center;
+}
+
+/* Stile für <button> Tag */
 .slyke-button {
     padding: 10px 20px;
-    margin: 10px auto;
+    margin: 10px auto; /* auto für horizontale Zentrierung bei display:block */
     font-size: 1em;
     cursor: pointer;
-    background-color: #ffffff;
-    color: rgb(0, 0, 0);
+    background-color: #000000ff; /* Schwarz */
+    color: white;
     border: none;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     transition: background-color 0.3s ease, transform 0.1s ease;
-    display: block;
+    display: block; /* Damit margin: auto funktioniert */
 }
-
 .slyke-button:hover {
-    background-color: #0099ff;
+    background-color: #333333ff; /* Dunkler bei Hover */
+    transform: translateY(-1px); /* Leichter Hoch-Effekt */
 }
-
 .slyke-button:active {
-    transform: translateY(1px);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    transform: translateY(0); /* Zurück beim Klicken */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 
+
+/* Stile für 'message' Statement */
 .slyke-message {
-    font-family: 'Inter', sans-serif;
     font-size: 1.2em;
     font-weight: bold;
-    color: #ffffff;
+    color: green;
     text-align: center;
     margin-top: 20px;
 }
 
+/* Stile für 'popUp' Statement */
+.slyke-popUp-statement {
+    padding: 15px;
+    margin: 10px auto;
+    background-color: #ffcc00ff; /* Orange/Gelb */
+    border-radius: 8px;
+    border: 2px dashed #ff9900ff;
+    color: #333333ff;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+/* Stile für 'component MyButton' (alter Button) */
 .slyke-button-old {
     padding: 10px 20px;
     margin: 10px;
     font-size: 1em;
     cursor: pointer;
-    background-color: #4CAF50;
+    background-color: #000000ff;
     color: white;
     border: none;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.slyke-button-old:hover {
+    background-color: #333333ff;
+}
+/* Für <Variable> - wird nicht direkt gerendert, kann aber für Debugging-Zwecke eine Klasse haben */
+/* .slyke-variable {} */
+
+/* Für <Display> */
+.slyke-display {
+    background-color: #e0ffe0; /* Hellgrün */
+    padding: 8px 12px;
+    margin: 5px;
+    border-radius: 4px;
+    border: 1px solid #a0ffa0;
+    font-family: 'Inter', sans-serif;
+    color: #006400; /* Dunkelgrün */
+    font-weight: bold;
+    display: inline-block;
+}
+
+/* Für <Box> */
+.slyke-box {
+    width: 100px;
+    height: 100px;
+    background-color: #add8e6; /* Hellblau */
+    border: 2px solid #6a5acd; /* Schieferblau */
+    margin: 10px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    color: #333;
+    border-radius: 8px;
 }
