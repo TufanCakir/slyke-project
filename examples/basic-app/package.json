@@ -1,22 +1,26 @@
 {
   "name": "slyke-basic-app-example",
   "version": "1.0.0",
-  "private": true,
-  "description": "A basic example application using Slyke.",
+  "description": "A basic example application using the Slyke programming language.",
+  "main": "src/index.js",
   "scripts": {
     "start": "webpack serve --mode development",
     "build": "webpack --mode production"
   },
+  "keywords": [],
+  "author": "Tufan Cakir",
+  "license": "MIT",
   "dependencies": {
-    "preact": "^10.0.0"
+    "preact": "^10.0.0",
+    "@preact/signals": "^1.0.0",
+    "slyke-loader": "workspace:^0.2.0"
   },
   "devDependencies": {
     "css-loader": "^7.1.2",
-    "html-webpack-plugin": "^5.0.0",
-    "slyke-loader": "workspace:^0.1.0",
+    "html-webpack-plugin": "^5.6.0",
     "style-loader": "^4.0.0",
-    "webpack": "^5.0.0",
-    "webpack-cli": "^5.0.0",
-    "webpack-dev-server": "^5.0.0"
+    "webpack": "^5.100.2",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.2.2"
   }
 }

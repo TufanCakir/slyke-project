@@ -1,125 +1,250 @@
-/* Allgemeine Stile für den App-Container */
+/* --- Allgemeine und Basis-Stile --- */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #f8f8f8; /* Leichtes Grau für den Hintergrund */
+    color: #333; /* Standardtextfarbe */
+}
+
 #app {
-    /* Beispiel: Zentrierung und Grund-Layout */
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    min-height: 100vh; /* Mindesthöhe des Viewports */
-    background-color: #f0f0f0;
-    font-family: 'Inter', sans-serif;
+    justify-content: flex-start; /* Elemente oben beginnen lassen */
+    min-height: 100vh;
+    padding: 20px; /* Etwas Padding um den gesamten App-Bereich */
+    box-sizing: border-box; /* Padding in die Breite/Höhe einbeziehen */
 }
 
-/* Stile für <echo> Tag */
+/* --- Basis-Komponenten-Styling --- */
+.slyke-echo,
+.slyke-template,
+.slyke-popUp-statement,
+.slyke-message,
+.slyke-display,
+.slyke-box,
+.slyke-reactiveState,
+.slyke-else,
+.slyke-component,
+.slyke-effect,
+.slyke-bind,
+.slyke-route,
+.slyke-router,
+.slyke-list,
+.slyke-item,
+.slyke-eventSource,
+.slyke-dialog,
+.slyke-modal,
+.slyke-storefront,
+.slyke-productCard,
+.slyke-list-container {
+    padding: 12px 18px; /* Einheitliches Padding */
+    margin: 8px auto; /* Einheitlicher vertikaler Margin, horizontal zentriert */
+    border-radius: 8px; /* Einheitliche abgerundete Ecken */
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Einheitlicher leichter Schatten */
+    max-width: 90%; /* Responsivität: Nicht zu breit auf kleinen Bildschirmen */
+    box-sizing: border-box;
+}
+
+/* --- Spezifische Komponenten-Stile --- */
+
+/* <echo> Tag */
 .slyke-echo {
-    padding: 10px;
-    margin: 5px;
-    background-color: #00e1ffff; /* Türkis */
-    border-radius: 5px;
-    border: 1px solid #b2ebf2;
-    color: #000000ff;
-    text-align: center;
+    background-color: #e0f7fa; /* Hellblau */
+    border: 1px solid #00bcd4; /* Türkis */
+    color: #006064; /* Dunkler Türkis */
+    font-weight: 500;
 }
 
-/* Stile für <template> Tag */
+/* <template> Tag (PopUp-ähnlich) */
 .slyke-template {
-    padding: 10px;
-    margin: 5px;
-    background-color: #ff0000ff; /* Rot */
-    border-radius: 5px;
-    border: 1px solid rgb(0, 0, 0); /* Weiß */
-    color: #611b1bff;
-    text-align: center;
+    background-color: #ffe0b2; /* Hellorange */
+    border: 1px solid #ff9800; /* Orange */
+    color: #e65100; /* Dunkleres Orange */
+    font-weight: 500;
 }
 
-/* Stile für <button> Tag */
-.slyke-button {
-    padding: 10px 20px;
-    margin: 10px auto; /* auto für horizontale Zentrierung bei display:block */
+/* <button> Tag */
+.slyke-button,
+.slyke-button-old { /* Alte Button-Komponente auch stylen */
+    padding: 12px 25px;
+    margin: 10px auto;
     font-size: 1em;
     cursor: pointer;
-    background-color: #000000ff; /* Schwarz */
+    background-color: #424242; /* Dunkelgrau */
     color: white;
     border: none;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    transition: background-color 0.3s ease, transform 0.1s ease;
-    display: block; /* Damit margin: auto funktioniert */
-}
-.slyke-button:hover {
-    background-color: #333333ff; /* Dunkler bei Hover */
-    transform: translateY(-1px); /* Leichter Hoch-Effekt */
-}
-.slyke-button:active {
-    transform: translateY(0); /* Zurück beim Klicken */
-    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-}
-
-
-/* Stile für 'message' Statement */
-.slyke-message {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: green;
-    text-align: center;
-    margin-top: 20px;
-}
-
-/* Stile für 'popUp' Statement */
-.slyke-popUp-statement {
-    padding: 15px;
-    margin: 10px auto;
-    background-color: #ffcc00ff; /* Orange/Gelb */
     border-radius: 8px;
-    border: 2px dashed #ff9900ff;
-    color: #333333ff;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
+    display: block;
+    font-weight: 600;
 }
-
-/* Stile für 'component MyButton' (alter Button) */
-.slyke-button-old {
-    padding: 10px 20px;
-    margin: 10px;
-    font-size: 1em;
-    cursor: pointer;
-    background-color: #000000ff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-}
+.slyke-button:hover,
 .slyke-button-old:hover {
-    background-color: #333333ff;
+    background-color: #616161; /* Heller bei Hover */
+    transform: translateY(-2px); /* Leichter Hoch-Effekt */
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
 }
-/* Für <Variable> - wird nicht direkt gerendert, kann aber für Debugging-Zwecke eine Klasse haben */
-/* .slyke-variable {} */
+.slyke-button:active,
+.slyke-button-old:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
 
-/* Für <Display> */
-.slyke-display {
-    background-color: #e0ffe0; /* Hellgrün */
-    padding: 8px 12px;
-    margin: 5px;
-    border-radius: 4px;
-    border: 1px solid #a0ffa0;
-    font-family: 'Inter', sans-serif;
-    color: #006400; /* Dunkelgrün */
+/* 'message' Statement */
+.slyke-message {
+    background-color: #e8f5e9; /* Hellgrün */
+    border: 1px solid #4caf50; /* Grün */
+    color: #2e7d32; /* Dunkleres Grün */
+    font-size: 1.3em;
     font-weight: bold;
-    display: inline-block;
+    margin-top: 25px;
+    margin-bottom: 15px;
 }
 
-/* Für <Box> */
+/* 'popUp' Statement */
+.slyke-popUp-statement {
+    background-color: #fffde7; /* Sehr helles Gelb */
+    border: 2px dashed #ffeb3b; /* Gelb */
+    color: #fbc02d; /* Dunkleres Gelb */
+    font-weight: 500;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* <Display> */
+.slyke-display {
+    background-color: #e3f2fd; /* Hellblau */
+    border: 1px solid #2196f3; /* Blau */
+    color: #1565c0; /* Dunkleres Blau */
+    font-weight: 500;
+    display: inline-block; /* Für Textfluss */
+    margin: 5px; /* Kleinerer Margin für Inline-Elemente */
+}
+
+/* <Box> */
 .slyke-box {
-    width: 100px;
-    height: 100px;
-    background-color: #add8e6; /* Hellblau */
-    border: 2px solid #6a5acd; /* Schieferblau */
-    margin: 10px auto;
+    min-width: 150px; /* Mindestbreite */
+    min-height: 80px; /* Mindesthöhe */
+    background-color: #e1f5fe; /* Sehr helles Blau */
+    border: 2px solid #03a9f4; /* Hellblau */
+    color: #01579b; /* Dunkelblau */
+    font-weight: 600;
+    display: flex; /* Inhalt zentrieren */
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Inhalt untereinander */
+    padding: 15px;
+}
+
+/* --- List-Komponenten --- */
+.slyke-list-container {
+    border: 1px solid #bdbdbd; /* Mittleres Grau */
+    background-color: #ffffff; /* Weißer Hintergrund */
+    padding: 15px 20px;
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: clamp(250px, 80%, 400px); /* Responsive Breite */
+}
+
+.slyke-list-item {
+    padding: 8px 0;
+    font-family: 'Inter', sans-serif;
+    color: #424242; /* Dunkelgrau */
+    font-size: 1.05em;
+    margin-bottom: 8px;
+    border-bottom: 1px dashed #e0e0e0; /* Hellgrau */
+    display: flex;
+    justify-content: space-between; /* Item und z.B. Button nebeneinander */
+    align-items: center;
+}
+.slyke-list-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+/* --- Platzhalter für zukünftige Tags (mit Basis-Styling) --- */
+.slyke-reactiveState,
+.slyke-else,
+.slyke-component,
+.slyke-effect,
+.slyke-bind,
+.slyke-route,
+.slyke-router,
+.slyke-list, /* Generischer List-Tag, falls nicht ListDisplay genutzt wird */
+.slyke-item, /* Generischer Item-Tag */
+.slyke-eventSource,
+.slyke-dialog,
+.slyke-modal,
+.slyke-storefront,
+.slyke-productCard {
+    background-color: #f0f4c3; /* Helles Gelbgrün */
+    border: 1px solid #cddc39; /* Limettengrün */
+    color: #827717; /* Dunkleres Gelbgrün */
+    font-size: 0.9em;
+    opacity: 0.7; /* Etwas transparenter, da es Platzhalter sind */
+}
+
+/* Spezifische Anpassungen für einige Platzhalter, falls sie später Inhalt bekommen */
+.slyke-dialog,
+.slyke-modal {
+    min-height: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'Inter', sans-serif;
     font-weight: bold;
-    color: #333;
-    border-radius: 8px;
+}
+.slyke-storefront {
+    min-height: 150px;
+    display: flex;
+    flex-wrap: wrap; /* Für Produktkarten */
+    gap: 10px; /* Abstand zwischen Elementen */
+}
+.slyke-productCard {
+    min-width: 120px;
+    min-height: 80px;
+    background-color: #e3f2fd;
+    border: 1px solid #90caf9;
+    color: #42a5f5;
+}
+/* public/styles.css */
+.slyke-fancy-card {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 10px auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+}
+.slyke-dark-area {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    margin: 10px auto;
+    border-radius: 5px;
+    text-align: center;
+}
+
+
+/* Responsivität für kleinere Bildschirme */
+@media (max-width: 600px) {
+    .slyke-echo,
+    .slyke-template,
+    .slyke-popUp-statement,
+    .slyke-message,
+    .slyke-display,
+    .slyke-box,
+    .slyke-list-container,
+    .slyke-button {
+        margin-left: 10px;
+        margin-right: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        max-width: calc(100% - 20px); /* Berücksichtigt den Margin */
+    }
 }
