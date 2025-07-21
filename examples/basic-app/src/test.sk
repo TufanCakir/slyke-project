@@ -1,0 +1,87 @@
+# Dies ist meine erste Slyke-Datei mit allen neuen Tags!
+# Sie wird vom slyke-loader in JavaScript umgewandelt.
+
+message "Willkommen bei Slyke! Entdecke die neuen Tags!"
+
+<echo message="Dies ist eine Echo-Nachricht, gerendert mit Preact!" />
+<echo message="Eine weitere Nachricht, nun über Virtual DOM." />
+
+<button text="Klick mich!" onClick="alert('Button geklickt!')" />
+<button text="Logge in Konsole" onClick="console.log('Button wurde geloggt!');" />
+
+# --- Neue Tags für Variablen und Anzeige ---
+<Variable name="userName" value="Slyke-Nutzer" />
+<Variable name="appVersion" value="0.2.0" />
+<Variable name="isFeatureEnabled" value="true" />
+
+<Display value="{userName}" />
+<Display value="App Version: {appVersion}" />
+<Display value="Feature Status: {isFeatureEnabled}" />
+
+# --- Neue Container-Tags ---
+<Box />
+<Box>
+    <echo message="Ich bin eine Box mit Inhalt!" />
+</Box>
+
+# --- Platzhalter für komplexere dynamische Tags (ohne Funktionalität in diesem Beispiel) ---
+# Diese Tags generieren aktuell nur leere Divs mit Klassen.
+# Ihre volle Funktionalität würde eine erweiterte Compiler-Logik erfordern.
+
+<ReactiveState />
+<Else />
+<Component />
+<Effect />
+<Bind />
+<Route />
+<Router />
+<List />
+<Item />
+<EventSource />
+<Dialog />
+<Modal />
+<Storefront />
+<ProductCard />
+
+# --- Beispiel für die alte MyButton Komponente (falls noch im Compiler) ---
+# component MyButton:
+#   text "Klick mich"
+#   onClick: alert("Button geklickt!")
+# Reaktives Beispiel mit Slyke
+
+message "Reaktive Variablen in Slyke!"
+
+<Variable name="counter" value="0" />
+<Variable name="userName" value="Gast" />
+
+<Display value="Zähler: {counter}" />
+<Display value="Name: {userName}" />
+
+<button text="Zähler erhöhen" onClick="slykeVariables.counter.value++" />
+<button text="Namen ändern" onClick="slykeVariables.userName.value = 'Tufan'" />
+
+<Box /><Variable name="name" value="Tufan" />
+<Bind name="name" />
+<Display value="Name ist: {name}" />
+
+<Effect on="name" do="console.log('⚡ Name geändert:', slykeVariables.name.value)" />
+
+<Variable name="items" value='["Apfel", "Birne", "Banane"]' />
+<List items="{items}" />
+
+
+<Variable name="username" value="Tufan" />
+message "Hallo {username}, wie heißt du?"
+<input name="username" />
+
+
+## if/else
+<Variable name="isAdmin" value="false" />
+
+<If condition="isAdmin">
+  message "Willkommen zurück, Admin!"
+</If>
+
+<Else>
+  message "Zugriff verweigert. Bitte anmelden."
+</Else>

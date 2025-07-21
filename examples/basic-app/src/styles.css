@@ -230,6 +230,15 @@ body {
     text-align: center;
 }
 
+.slyke-input {
+        background-color: #333;
+    color: white;
+    padding: 20px;
+    margin: 10px auto;
+    border-radius: 5px;
+    text-align: center;
+
+}
 
 /* Responsivität für kleinere Bildschirme */
 @media (max-width: 600px) {
